@@ -2,7 +2,7 @@
 """
 
 """
-from typing import List, Union
+from typing import List, Union, Tuple
 
 
 def to_kv(k: str, v: [int, float]) -> Tuple[str, float]:
