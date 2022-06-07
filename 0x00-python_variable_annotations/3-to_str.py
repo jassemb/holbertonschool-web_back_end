@@ -5,7 +5,7 @@ returns the string representation of the float
 """
 
 
-def floor(n: float) -> str:
+def to_str(n: float) -> str:
     """
     to_str function
     """
