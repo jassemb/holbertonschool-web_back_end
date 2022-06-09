@@ -8,7 +8,6 @@ import random
 from typing import Generator
 
 
-
 async def async_comprehension() -> Generator[float, None, None]:
     """
     collect 10 random numbers using
