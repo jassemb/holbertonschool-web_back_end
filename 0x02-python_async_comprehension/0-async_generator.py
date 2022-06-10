@@ -11,7 +11,7 @@ from typing import Generator
 async def async_generator() -> Generator[float, None, None]:
     """
     collect 10 random numbers using
-    an async comprehensing over async_generator
+    async_generator
     """
     for i in range(10):
         await asyncio.sleep(1)
