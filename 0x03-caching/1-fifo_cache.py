@@ -28,6 +28,8 @@ class FIFOCache(BaseCaching):
                     print('DISCARD:', list(self.cache_data.keys())[0])
                     break
                 self.cache_data.pop(k)
+            else:
+                pass
 
     def get(self, key):
         """
