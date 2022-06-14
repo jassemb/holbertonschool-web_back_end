@@ -4,7 +4,7 @@ hypermedia_pagination
 """
 import csv
 import math
-from typing import List
+from typing import List, Dict, Union
 
 
 class Server:
