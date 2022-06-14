@@ -40,14 +40,14 @@ class Server:
         return (start, end)
 
 
-def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-    """
-    get page Simple pagination
-    """
-    assert isinstance(page, int) and isinstance(page_size, int)
-    assert page > 0 and page_size > 0
-    dataset = self.dataset()
-    start, end = self.index_range(page, page_size)
-    if end > len(dataset):
-        return []
-    return [list(dataset[row]) for row in range(start, end)]
+    def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+        """
+        get page Simple pagination
+        """
+        assert isinstance(page, int) and isinstance(page_size, int)
+        assert page > 0 and page_size > 0
+        dataset = self.dataset()
+        start, end = self.index_range(page, page_size)
+        if end > len(dataset):
+            return []
+        return [list(dataset[row]) for row in range(start, end)]
