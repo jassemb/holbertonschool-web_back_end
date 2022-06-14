@@ -4,7 +4,7 @@ Simple pagination
 """
 import csv
 import math
-from typing import List,Tuple
+from typing import List, Tuple
 
 
 class Server:
@@ -27,7 +27,7 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-            pass
+        pass
 
     def index_range(self, page: int, page_size: int) -> Tuple[int, int]:
         """
@@ -39,11 +39,12 @@ class Server:
             start += page_size
         return (start, end)
 
-def get_page(self ,page: int = 1 , page_size: int =10) ->List[List]:
+
+def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
     """
     get page Simple pagination
     """
-    assert type(page) is int and type(page_size) is int
+    assert isinstance(page, int) and isinstance(page_size, int)
     assert page > 0 and page_size > 0
     dataset = self.dataset()
     start, end = self.index_range(page, page_size)
