@@ -26,6 +26,19 @@ class Server:
 
         return self.__dataset
 
+    def index_range(page: int, page_size: int) -> Tuple[int, int]:
+        """
+        return a tuple of size two containing a
+        start index and an end index corresponding to the
+        range of indexes to return in a list
+        for those particular pagination parameters.
+        """
+        end: int = page * page_size
+        start: int = 0
+        for i in range(page - 1):
+            start += page_size
+        return (start, end)
+
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """
         get page Simple pagination
