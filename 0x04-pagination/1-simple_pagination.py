@@ -39,7 +39,6 @@ class Server:
             start += page_size
         return (start, end)
 
-
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """
         get page Simple pagination
