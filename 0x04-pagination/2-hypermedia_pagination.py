@@ -4,7 +4,7 @@ hypermedia_pagination
 """
 import csv
 import math
-from typing import List, Dict, Union
+from typing import Tuple, List, Dict, Union
 
 
 class Server:
@@ -65,4 +65,4 @@ class Server:
                          'next_page': next_page,
                          'prev_page': prev_page,
                          'total_pages': totalPage}
-        return hateoas    
+        return hateoas
