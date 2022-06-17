@@ -9,13 +9,15 @@ import os
 
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
+
+
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class"""
     REDACTION = "***"
     FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
     SEPARATOR = ";"
 
-    def __init__(self,fields: List[str]):
+    def __init__(self, fields: List[str]):
         super(RedactingFormatter, self).__init__(self.FORMAT)
         self.fields = fields
 
@@ -38,6 +40,7 @@ def filter_datum(fields: List[str], redaction: str, message: str,
                 lst[i] = re.sub(lst[i], '', lst[i])
                 lst[i] = subst
     return separator.join(lst)
+
 
 def get_logger() -> logging.Logger:
     """
