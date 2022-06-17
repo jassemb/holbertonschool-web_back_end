@@ -55,3 +55,36 @@ def get_logger() -> logging.Logger:
     ch.setFormatter(formatter)
     logger.addHandler(ch)
     return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """ A function that returns a connector to a database """
+    c = mysql.connector.connection.MySQLConnection(
+        user=os.getenv('PERSONAL_DATA_DB_USERNAME', 'root'),
+        password=os.getenv('PERSONAL_DATA_DB_PASSWORD', ''),
+        host=os.getenv('PERSONAL_DATA_DB_HOST', 'localhost'),
+        database=os.getenv('PERSONAL_DATA_DB_NAME')
+    )
+    return c
+
+
+def main():
+    """ main function """
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM users;")
+    logger = get_logger()
+    for row in cursor:
+        msg = "name={}; email={}; phone={}; ssn={}; password={};\
+ip={}; last_login={}; user_agent={}; ".format(
+            row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]
+        )
+        msg = filter_datum(list(PII_FIELDS), '***', msg, '; ')
+        logger.info(msg)
+    cursor.close()
+    db.close()
+
+
+if __name__ == '__main__':
+    """ Only the main function should run when the module is executed """
+    main()
