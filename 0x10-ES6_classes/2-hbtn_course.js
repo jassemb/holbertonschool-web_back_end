@@ -1,4 +1,4 @@
-export default class ClassRoom {
+export default class HolbertonCourse {
   constructor(name, length, students) {
     if (typeof (name) !== 'string') throw TypeError('name must be a srting');
     if (typeof (length) !== 'number') throw TypeError('length must be a number');
