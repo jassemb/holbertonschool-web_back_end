@@ -1,0 +1,34 @@
+export default class ClassRoom {
+  constructor(name, length, students) {
+    if (typeof (name) !== 'string') throw TypeError('name must be a srting');
+    if (typeof (length) !== 'number') throw TypeError('length must be a number');
+    if (!Array.isArray(students)) throw TypeError('students must be an array');
+    this._name = name;
+    this._length = length;
+    this._students = students;
+  }
+
+  get name() {
+    return this._name;
+  }
+
+  get length() {
+    return this._length;
+  }
+
+  get students() {
+    return this._students;
+  }
+
+  set name(name) {
+    this._name = name;
+  }
+
+  set length(length) {
+    this.length = length;
+  }
+
+  set students(students) {
+    this._students = students;
+  }
+}
