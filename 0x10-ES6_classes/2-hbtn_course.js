@@ -1,7 +1,7 @@
 export default class HolbertonCourse {
   constructor(name, length, students) {
-    if (typeof (name) !== 'string') throw TypeError('name must be a srting');
-    if (typeof (length) !== 'number') throw TypeError('length must be a number');
+    if (typeof (name) !== 'string') throw TypeError('Name must be a string');
+    if (typeof (length) !== 'number') throw TypeError('Length must be a number');
     if (students.every((i) => (typeof i !== 'string'))) {
       throw Error('Students must be an Array of strings');
     }
@@ -23,12 +23,16 @@ export default class HolbertonCourse {
   }
 
   set name(name) {
-    if (typeof (name) !== 'string') throw TypeError('Name must be a string');
+    if (typeof name !== 'string') {
+      throw Error('Name must be a string');
+    }
     this._name = name;
   }
 
   set length(length) {
-    if (typeof (length) !== 'number') throw TypeError('Length must be a number');
+    if (typeof length !== 'number') {
+      throw Error('Length must be a number');
+    }
     this.length = length;
   }
 
