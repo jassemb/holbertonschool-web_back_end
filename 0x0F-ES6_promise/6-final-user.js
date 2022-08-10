@@ -7,7 +7,7 @@ export default function handleProfileSignup(firstName, lastName, filename) {
       for (const res of data) {
         if (res.status === 'rejected') {
           res.value = `Error: ${res.reason.message}`;
-          return res.reason;
+          delete res.reason;
         }
       }
       return data;
