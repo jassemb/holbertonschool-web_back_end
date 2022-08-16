@@ -29,3 +29,11 @@ class Cache():
             = None) -> Union[str, bytes, int, float]:
         data = self._redis.get(key)
         return data
+        
+    def get_str(self, data):
+        """method that converts data to string"""
+        return data.decode("utf-8")
+    def get_int(self, data):
+        """method that converts data to int"""
+        return int(data)
+    
