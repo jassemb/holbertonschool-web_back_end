@@ -27,13 +27,16 @@ class Cache():
 
     def get(self, key: str, fn: Optional[Callable]
             = None) -> Union[str, bytes, int, float]:
-        data = self._redis.get(key)
-        return data
-        
+        for key in self._redis.keys():
+            data = self._redis.get(key)
+            if fn:
+                return fn(data)
+            return data
+
     def get_str(self, data):
         """method that converts data to string"""
         return data.decode("utf-8")
+
     def get_int(self, data):
         """method that converts data to int"""
         return int(data)
-    
