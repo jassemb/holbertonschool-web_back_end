@@ -49,7 +49,7 @@ class Cache():
                 return fn(data)
             return data
 
-    def get_str(self, data):
+    def get_str(self,  data: bytes):
         """method that converts data to string"""
         return data.decode("utf-8")
 
