@@ -13,15 +13,16 @@ def count_calls(method: Callable) -> Callable:
     Counts the number of calls decorator
     """
     key = method.__qualname__
+
     @wraps(method)
-    def wrapper(self,*args, **kwds):
+    def wrapper(self, *args, **kwds):
         """
         Wrapper
         """
         self._redis.incr(key)
         return method(self, *args, **kwds)
     return wrapper
-    
+
 
 class Cache():
     """Cache class"""
@@ -31,6 +32,7 @@ class Cache():
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """
         method should generate a random key
@@ -49,7 +51,7 @@ class Cache():
                 return fn(data)
             return data
 
-    def get_str(self,  data: bytes):
+    def get_str(self, data: bytes) -> str:
         """method that converts data to string"""
         return data.decode("utf-8")
 
