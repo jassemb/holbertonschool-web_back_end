@@ -23,14 +23,16 @@ def count_calls(method: Callable) -> Callable:
         return method(self, *args, **kwds)
     return wrapper
 
+
 def call_history(method: Callable) -> Callable:
     """
     Stores the history of inputs and outputs for a called function
     """
     inputKey = method.__qualname__ + ":inputs"
     outputKey = method.__qualname__ + ":outputs"
+
     @wraps(method)
-    def wrapper(self, *args,**kwds):
+    def wrapper(self, *args, **kwds):
         """
         RPUSH Insert all the specified values at the tail
         of the list stored at key.
@@ -40,6 +42,8 @@ def call_history(method: Callable) -> Callable:
         self._redis.rpush(outputKey, str(output))
         return output
     return wrapper
+
+
 def replay(fn: Callable) -> str:
     """ replay function to display the history of
     calls of a particular function."""
@@ -75,7 +79,7 @@ class Cache():
         return key
 
     def get(self, key: str, fn: Optional[Callable] = None)\
-         -> Union[str, bytes, int, float]:
+            -> Union[str, bytes, int, float]:
         data = self._redis.get(key)
         for key in self._redis.keys():
             if fn:
