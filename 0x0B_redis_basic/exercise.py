@@ -23,6 +23,23 @@ def count_calls(method: Callable) -> Callable:
         return method(self, *args, **kwds)
     return wrapper
 
+def call_history(method: Callable) -> Callable:
+    """
+    Stores the history of inputs and outputs for a called function
+    """
+    @wraps(method)
+    def wrapper(self, *args):
+        """
+        RPUSH Insert all the specified values at the tail
+        of the list stored at key.
+        """
+        self._redis.rpush(f"{method.__qualname__}:inputs", str(args))
+        output = method(self, *args)
+        self._redis.rpush(f"{method.__qualname__}:outputs", str(output))
+        return output
+    return wrapper
+
+
 
 class Cache():
     """Cache class"""
