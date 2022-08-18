@@ -27,15 +27,17 @@ def call_history(method: Callable) -> Callable:
     """
     Stores the history of inputs and outputs for a called function
     """
+    inputKey = method.__qualname__ + ":inputs"
+    outputKey = method.__qualname__ + ":outputs"
     @wraps(method)
-    def wrapper(self, *args):
+    def wrapper(self, *args,**kwds):
         """
         RPUSH Insert all the specified values at the tail
         of the list stored at key.
         """
-        self._redis.rpush(f"{method.__qualname__}:inputs", str(args))
-        output = method(self, *args)
-        self._redis.rpush(f"{method.__qualname__}:outputs", str(output))
+        self._redis.rpush(inputKey, str(args))
+        output = method(self, *args, *kwds)
+        self._redis.rpush(outputKey, str(output))
         return output
     return wrapper
 
