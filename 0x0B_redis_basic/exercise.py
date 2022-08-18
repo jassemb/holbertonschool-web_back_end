@@ -40,7 +40,19 @@ def call_history(method: Callable) -> Callable:
         self._redis.rpush(outputKey, str(output))
         return output
     return wrapper
-
+def replay(fn: Callable) -> str:
+    """ replay function to display the history of
+    calls of a particular function."""
+    # method: __qualname__
+    method = fn.__qualname__
+    inputs = f"{method}:inputs"
+    outputs = f"{method}:outputs"
+    input_list = fn.__self__._redis.lrange(inputs, 0, -1)
+    output_list = fn.__self__._redis.lrange(outputs, 0, -1)
+    number = fn.__self__._redis.get(method).decode('utf-8')
+    print(f"{method} was called {number} times:")
+    for inp, out in zip(input_list, output_list):
+        print(f"{method}(*{inp.decode('utf-8')}) -> {out.decode('utf-8')}")
 
 
 class Cache():
