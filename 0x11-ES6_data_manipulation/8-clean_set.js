@@ -8,5 +8,5 @@ export default function cleanSet (set,startString) {
       arr.push(element.replace(startString, ''));
     }
   });
-    return ( arr.join("_"));
+    return ( arr.join("-"));
 }
