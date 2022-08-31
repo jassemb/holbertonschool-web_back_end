@@ -1,7 +1,5 @@
-export default function groceriesList (name, quantity) {
-    if (name.length === 0 || quantity.length === 0) {
-        return {};
-    }
+export default function groceriesList () {
+    
     const groceries = new Map();
     groceries.set('Apples', 10);
     groceries.set('Tomatoes', 10);
