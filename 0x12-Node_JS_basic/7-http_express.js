@@ -1,14 +1,14 @@
 const express = require('express');
-
 const countStudents = require('./3-read_file_async');
 
 const app = express();
 const port = 1245;
+const database = process.argv[2];
 
 app.get('/', (req, res) => {
   res.send('Hello Holberton School!');
-
-  app.get('/students', (req, res) => {
+});
+app.get('/students', (req, res) => {
     countStudents(database)
       .then((data) => {
         const { students, csStudents, sweStudents } = data;
@@ -24,4 +24,8 @@ app.get('/', (req, res) => {
         res.send(`This is the list of our students\n${error.message}`);
       });
   });
-}).listen(port, () => {}) ;
+
+app.listen(port, () => {
+
+});
+module.exports = app;
